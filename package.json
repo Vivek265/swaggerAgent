@@ -1,0 +1,24 @@
+{
+  "name": "swagger-agent",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Vivek265/swaggerAgent#readme",
+  "bugs": {
+    "url": "https://github.com/Vivek265/swaggerAgent/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vivek265/swaggerAgent.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "langchain": "^1.2.32",
+    "openai": "^6.29.0"
+  }
+}
