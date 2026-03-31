@@ -20,7 +20,7 @@ const program = new Command();
 program
   .name(pkg.name || "via-swagger")
   .description("A CLI tool to create swagger with the help of AI")
-  .version(pkg.version || "1.0.0", "-v, --version", "Output the current version");
+  .version(pkg?.default?.version || "1.0.0", "-v, --version", "Output the current version");
 
 program
   .command("set-api-key")
