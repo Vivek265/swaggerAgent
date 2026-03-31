@@ -32,7 +32,7 @@ export async function handleSwaggerAdd() {
             return;
         }
         else {
-            console.log("swagger file confg created");
+            console.log("swagger file config created");
             fs.writeFileSync(path.join(process.cwd(), 'via-swagger.json'), JSON.stringify({ fileName: swaggerFileNameResult }))
         }
     }
@@ -69,16 +69,19 @@ function getApiModel(modelType, apiKey) {
         return new ChatOpenAI({
             model: "gpt-4o",
             apiKey: apiKey,
+            temperature: 0,
         });
     } else if (modelType === 'claude') {
         return new ChatAnthropic({
             model: "claude-3-5-sonnet-latest",
             apiKey: apiKey,
+            temperature: 0,
         });
     } else {
         return new ChatGoogleGenerativeAI({
             model: "gemini-2.5-flash",
-            apiKey: apiKey
+            apiKey: apiKey,
+            temperature: 0
         });
     }
 }
