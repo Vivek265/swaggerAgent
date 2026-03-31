@@ -1,7 +1,21 @@
 {
   "name": "via-swagger",
   "version": "1.0.2",
-  "description": "",
+  "description": "A CLI tool to automatically generate and maintain Swagger (OpenAPI) documentation with the help of AI agents.",
+  "keywords": [
+    "swagger",
+    "openapi",
+    "ai",
+    "cli",
+    "generator",
+    "documentation",
+    "api",
+    "langchain",
+    "llm",
+    "anthropic",
+    "openai",
+    "gemini"
+  ],
   "homepage": "https://github.com/Vivek265/swaggerAgent#readme",
   "bugs": {
     "url": "https://github.com/Vivek265/swaggerAgent/issues"
