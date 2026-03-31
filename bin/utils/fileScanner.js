@@ -21,7 +21,17 @@ export const getAllFileAndFolders = async (dir = '', projectRoot = process.cwd()
         const fileName  = file.replace(/\\/g,'/');
         const pathName = relativePath.replace(/\\/g,'/');
         if (!stats.isDirectory()) {
-            const fileContent = await readFile(filePath, 'utf-8');
+            const ext = path.extname(file).toLowerCase();
+            const allowedExts = ['.js', '.ts', '.jsx', '.tsx', '.mjs', '.cjs'];
+            const ignoredFiles = ['package-lock.json', 'yarn.lock', 'pnpm-lock.yaml'];
+
+            if (ignoredFiles.includes(file) || !allowedExts.includes(ext) || file.endsWith('.min.js')) {
+                return [];
+            }
+
+            let fileContent = await readFile(filePath, 'utf-8');
+            fileContent = fileContent.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n');
+            
             return {
                 fileName,
                 path: pathName,
@@ -75,15 +85,32 @@ export const readFiles = async (dirPath, modulesToProcess= []) => {
     return modulesToProcess;
 }
 
-export function getFileNames(files,existingFiles=[]){
-    for(let file of files){
-        
-        if(Array.isArray(file)){
-         let currentFiles = getFileNames(file);
-         existingFiles=[...existingFiles,...currentFiles];
+export function getFileNames(files, existingFiles = []) {
+    for (let file of files) {
+        if (Array.isArray(file)) {
+            let currentFiles = getFileNames(file, []);
+            existingFiles = [...existingFiles, ...currentFiles];
+        } else {
+           if (!file.isDirectory) {
+                existingFiles = [...existingFiles, { fileName: file.fileName, path: file.path }];
+            }
         }
-        else{
-            existingFiles=[...existingFiles,{fileName:file.fileName,path:file.path}]
+    }
+    return existingFiles;
+}
+
+export function getChangedFiles(files, swaggerFileName, changedFiles = [], existingFiles = []) {
+    const projectRoot = process.cwd();
+    for (let file of files) {
+        if (Array.isArray(file)) {
+           let currentFiles = getChangedFiles(file, swaggerFileName, changedFiles, []);
+            existingFiles = [...existingFiles, ...currentFiles];
+        } else {
+           if (!file.isDirectory && file.path !== swaggerFileName) {
+             if (!changedFiles.length || changedFiles.includes(path.resolve(projectRoot, file.path))) {
+                    existingFiles = [...existingFiles, file];
+                }
+            }
         }
     }
     return existingFiles;

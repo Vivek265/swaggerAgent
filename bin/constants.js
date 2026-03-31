@@ -58,7 +58,11 @@ export const IGNORE_LIST = [
   "*.local",
   "*.swp",
   "*.swo",
-  "*.bak"
+  "*.bak",
+
+  //via-swagger config
+  "via-swagger.json"
+
 ];
 export const configDir=path.join(os.homedir(),".via-wagger");
 export const configFilePath = path.join(configDir,"config.json");
