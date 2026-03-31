@@ -1,6 +1,6 @@
 {
   "name": "via-swagger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A CLI tool to automatically generate and maintain Swagger (OpenAPI) documentation with the help of AI agents.",
   "keywords": [
     "swagger",
