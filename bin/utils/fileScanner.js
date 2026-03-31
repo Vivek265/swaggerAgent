@@ -9,7 +9,6 @@ const ENTRY_FILE_REGEX = /\.(module|routes|router|stack|construct)\.(ts|js|tsx|j
 
 export const getAllFileAndFolders = async (dir = '', projectRoot = process.cwd()) => {
     try{
-   //projectRoot="D:\\langChain\\src"
     const currentDir = path.join(projectRoot, dir);
     const allFiles = (await readdir(currentDir))
         .filter((file) => !IGNORE_LIST.includes(file));
